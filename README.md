@@ -1,0 +1,2 @@
+# Sendmail
+Sendmail related scripts
