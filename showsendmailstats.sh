@@ -17,7 +17,7 @@ if [ $(echo $MAILSEND | grep "send") ]
                 else
                         EMAILADD=$DefalutEmailAdd
                         echo "No email address was suplied in the script parameter"
-						            echo "Report will be sent to default email address set in the script configuration"
+			echo "Report will be sent to default email address set in the script configuration"
                 fi
                         echo "Output of this report will be emailed to: $EMAILADD"
                 if [ $LOGS = "MIN" ]
@@ -26,7 +26,7 @@ if [ $(echo $MAILSEND | grep "send") ]
                         echo "Fetching Logs starting date:$D - for $LOGS"
                         for i in `seq 0 9`;
                         do 
-						#echo "$D:0$i=$(grep "$D:0$i" $LOGPATH | grep "from=" -c)";
+			#echo "$D:0$i=$(grep "$D:0$i" $LOGPATH | grep "from=" -c)";
                         NUM=$(grep "$D:0$i" $LOGPATH | grep "from=" -c)
                         if [ $NUM -eq 0 ];then break;fi
                         STATS=$(grep "$D:0$i" $LOGPATH | grep "stat=S" -c)
@@ -34,12 +34,12 @@ if [ $(echo $MAILSEND | grep "send") ]
                         STATU=$(grep "$D:0$i" $LOGPATH | grep "stat=U" -c)
                         RJCT=$(grep "$D:0$i" $LOGPATH | grep "rejecting connections" -c)
                         echo "$D:0$i From=$NUM Sent=$STATS Deferred=$STATD User unknown=$STATU RJCTCON=$RJCT";						
-						            SendMail=$TRUE
+			SendMail=$TRUE
                         done >> mail.txt
 
                         for i in `seq 10 59`;
                         do 
-						            #echo "$D:$i=$(grep "$D:$i" $LOGPATH | grep "from=" -c)";
+			#echo "$D:$i=$(grep "$D:$i" $LOGPATH | grep "from=" -c)";
                         NUM=$(grep "$D:$i" $LOGPATH | grep "from=" -c)
                         if [ $NUM -eq 0 ];then break;fi
                         STATS=$(grep "$D:$i" $LOGPATH | grep "stat=S" -c)
@@ -47,7 +47,7 @@ if [ $(echo $MAILSEND | grep "send") ]
                         STATU=$(grep "$D:$i" $LOGPATH | grep "stat=U" -c)
                         RJCT=$(grep "$D:$i" $LOGPATH | grep "rejecting connections" -c)
                         echo "$D:$i From=$NUM Sent=$STATS Deferred=$STATD User unknown=$STATU RJCTCON=$RJCT";						
-						            SendMail=$TRUE
+			SendMail=$TRUE
                         done >> mail.txt
                 elif [ $LOGS = "HOUR" ]
                 then
@@ -55,7 +55,7 @@ if [ $(echo $MAILSEND | grep "send") ]
                         echo "Subject:[$D]Mailrelay statistics for server:$SERVER" > mail.txt
                         for i in `seq 0 9`;
                         do 
-						            #echo "$D 0$i=$(grep "$D 0$i" $LOGPATH | grep "from=" -c)";
+			#echo "$D 0$i=$(grep "$D 0$i" $LOGPATH | grep "from=" -c)";
                         NUM=$(grep "$D 0$i" $LOGPATH | grep "from=" -c)
                         if [ $NUM -eq 0 ];then break;fi
                         STATS=$(grep "$D 0$i" $LOGPATH | grep "stat=S" -c)
@@ -63,17 +63,17 @@ if [ $(echo $MAILSEND | grep "send") ]
                         STATU=$(grep "$D 0$i" $LOGPATH | grep "stat=U" -c)
                         RJCT=$(grep "$D 0$i" $LOGPATH | grep "rejecting connections" -c)
                         echo "$D 0$i From=$NUM Sent=$STATS Deferred=$STATD User unknown=$STATU RJCTCON=$RJCT";
-						            done >> mail.txt
+			done >> mail.txt
 
                         for i in `seq 10 23`;
                         do 
-						            #echo "$D $i=$(grep "$D $i" $LOGPATH | grep "from=" -c)";
+			#echo "$D $i=$(grep "$D $i" $LOGPATH | grep "from=" -c)";
                         STATS=$(grep "$D $i" $LOGPATH | grep "stat=S" -c)
                         STATD=$(grep "$D $i" $LOGPATH | grep "stat=D" -c)
                         STATU=$(grep "$D $i" $LOGPATH | grep "stat=U" -c)
                         RJCT=$(grep "$D $i" $LOGPATH | grep "rejecting connections" -c)
                         echo "$D $i From=$NUM Sent=$STATS Deferred=$STATD User unknown=$STATU RJCTCON=$RJCT";						
-						            SendMail=$TRUE
+			SendMail=$TRUE
                         done >> mail.txt
                 fi
 
