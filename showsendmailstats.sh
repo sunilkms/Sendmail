@@ -139,6 +139,6 @@ else
                 then
                         echo "Top 10 IP will be displayed for given time ($D)"
                         #grep "$D" $LOGPATH | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | sort | uniq -c |sort -nr -k 1 | head -10;
-						            grep "$D" $LOGPATH | grep "from=" | sed 's/.*relay=//' | sort | uniq -c |sort -nr -k 1 | head -10
-				fi
+			grep "$D" $LOGPATH | grep "from=" | sed 's/.*relay=//' | sort | uniq -c |sort -nr -k 1 | head -10
+		fi
 fi
